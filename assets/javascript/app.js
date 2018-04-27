@@ -36,7 +36,8 @@ $(document).ready(function () {
                 alert("Time is over");
                 timer.reset();
                 notanswer++;
-                console.log(notanswer);
+                console.log("notanswer: " + notanswer);
+                nextQuestion();
             }
 
 
@@ -85,35 +86,70 @@ $(document).ready(function () {
     ];
 
 
-    function callQuestion(){
+    function callQuestion() {
         array = questions[countQuestions];
         $(".questions").html(array.Q);
         $("#a").text(array.a);
         $("#b").text(array.b);
         $("#c").text(array.c);
         $("#d").text(array.d);
-        
+
 
     };
 
 
-    $(".container").on("click","button", function(){
-        if( this.id == array.answer) {
+    $(".container").on("click", "button", function () {
+        if (this.id == array.answer) {
             alert("Correct!");
             correct++;
-            console.log(correct);
+            console.log("correct: "+correct);
             
+
         } else {
             alert("Wrong!");
             incorrect++;
-            console.log(incorrect);
+            console.log("incorrect: "+incorrect);
         }
+
+        nextQuestion();
+        console.log("countQuestion: " + countQuestions);
     });
 
+    function nextQuestion() {
+        countQuestions++;
+        console.log("count: "+ countQuestions);
+        if (countQuestions == questions.length) {
+            alert("Correct number: " + correct + "\n" +
+                "Incorrect number: " + incorrect + "\n" +
+                "Unanswered number: " + notanswer + ".");
+            all();
+            timer.reset();
+            timer.stop();
+            $(".start").show();
+        }
+
+        else {
+            callQuestion();
+
+        }
 
 
-    
-    
+
+    }
+    //reset all
+    function all() {
+        countQuestions = 0;
+        array = [];
+        correct = 0;
+        incorrect = 0;
+        notanswer = 0;
+        time = 30;
+        callQuestion();
+
+    }
+
+
+
 
 
 
