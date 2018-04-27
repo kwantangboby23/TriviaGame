@@ -1,26 +1,36 @@
 //Click the start button to play game
 
 $(document).ready(function () {
-    //count Questions
+    //set variables
     var countQuestions = 0;
     var array = [];
     var correct = 0;
     var incorrect = 0;
     var notanswer = 0;
+    $("button").hide();
+
 
     //setting up countdowntimer
     var timer = {
         time: 30,
-        //reset function
+        //reset all
         reset: function () {
             this.time = 30;
             $(".timeleft").html("<h2>" + this.time + "seconds left</h2>");
 
+
+
+
+
+
+
+
         },
-        //start function
+        //start timer function
         start: function () {
             counter = setInterval(timer.countdown, 1000);
             $(".start").hide();
+            $("button").show();
             callQuestion();
 
         },
@@ -44,8 +54,14 @@ $(document).ready(function () {
         }
 
     }
+    //Push start button to play game.
 
     $(".start").on("click", timer.start);
+
+
+
+
+    //Questions & choices
 
     var questions = [
         {
@@ -85,10 +101,11 @@ $(document).ready(function () {
         }
     ];
 
+    //call questions
 
     function callQuestion() {
         array = questions[countQuestions];
-        $(".questions").html(array.Q);
+        $("#q").text(array.Q);
         $("#a").text(array.a);
         $("#b").text(array.b);
         $("#c").text(array.c);
@@ -97,35 +114,42 @@ $(document).ready(function () {
 
     };
 
+    //count correct numbers and incorrect numbers.
 
     $(".container").on("click", "button", function () {
         if (this.id == array.answer) {
             alert("Correct!");
             correct++;
-            console.log("correct: "+correct);
-            
+            console.log("correct: " + correct);
+
 
         } else {
             alert("Wrong!");
             incorrect++;
-            console.log("incorrect: "+incorrect);
+            console.log("incorrect: " + incorrect);
         }
 
         nextQuestion();
         console.log("countQuestion: " + countQuestions);
     });
-
+    // return corrent, incorrent, unanswered numbers.
     function nextQuestion() {
         countQuestions++;
-        console.log("count: "+ countQuestions);
+        console.log("count: " + countQuestions);
         if (countQuestions == questions.length) {
             alert("Correct number: " + correct + "\n" +
                 "Incorrect number: " + incorrect + "\n" +
-                "Unanswered number: " + notanswer + ".");
-            all();
+                "Unanswered number: " + notanswer);
+
             timer.reset();
             timer.stop();
+            $("#q").text("Questions");
+            allreset();
             $(".start").show();
+            $("button").hide();
+
+
+
         }
 
         else {
@@ -136,63 +160,18 @@ $(document).ready(function () {
 
 
     }
-    //reset all
-    function all() {
+    // reset all 
+    function allreset() {
         countQuestions = 0;
         array = [];
         correct = 0;
         incorrect = 0;
         notanswer = 0;
-        time = 30;
-        callQuestion();
+
 
     }
 
 
 
-
-
-
-
-
-
 });
 
-//Push start button to play the game
-
-
-// var nba = {
-    //questions: ["Which of thses players never scored at least 2500 points in a season?",
-                //"In 1980, Oscar Robertson was the NBA's all time leader in assists, who was 2nd?",
-                //"Which of these players has the most All-NBA 1st team selection?",
-                //"Whihc of these players reached 25000 points the fastest?"] 
-
-/*
-    //question1: ["a. Rick Barry"
-             "b. Bob McAdoo"
-             "c. Kevin Durant"
-             "d. LeBron James"] answer : d
-    
-             
-    //question2:  ["a.Lenny Wilkens",
-                "b. Magic Johnson",
-                "c. Bob Cousy"
-                "d. Jerry west"] answer: a
-
-    //question3:  ["a. Bill Russell",
-                   "b. Charles Barkley",
-                   "c. John Stockton",
-                   "d. Dolph Schayes"] answer : d
-
-    //question4: ["a. Lebron James",
-                  "b. Kareem Abdul-Jabbar"
-                  "c. Michael Jordan",
-                  "d. Wily Chamberlain"] answer : d
-
-    ]
-
-
-
-
-
-}*/

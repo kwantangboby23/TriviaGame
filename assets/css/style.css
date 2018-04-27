@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: right;
+    background: url("https://cdn.nba.net/nba-drupal-prod/2017-08/SEO-image-NBA-logoman.jpg");
+    color:white;
+    
+}
+
+button{
+    width: 20%;
+    height: 20%;
+    clear: both;
+}
+
+button:hover{
+    background:blue;
+    color: white;
+}
+
+.questions{
+    background:black;   
+}
+
+#q{
+    font-size: 30px;
+}
+.start{
+    width: 20%;
+    
+
+    
+}
+
+.start:hover{
+    background: blue;
+    color: white;
+}
+
+.background_music{
+    visibility: hidden;
+}
+
